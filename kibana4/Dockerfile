@@ -1,4 +1,4 @@
-FROM vovimayhem/java:oracle-java7
+FROM debian:jessie
 MAINTAINER Roberto Quintanilla <roberto.quintanilla@gmail.com>
 
 # Add the kibana user and group first to make sure their IDs get assigned
@@ -12,7 +12,7 @@ RUN cp /etc/default/useradd /etc/default/useradd.bak \
   && rm /kibana/.bash_logout /kibana/.bashrc /kibana/.profile
 
 # Set the Kibana Version:
-ENV KIBANA_VERSION 4.0.0-beta3
+ENV KIBANA_VERSION 4.0.0-rc1
 
 # Fetch Kibana:
 # - Install curl so we can fetch the kibana code
@@ -21,7 +21,7 @@ ENV KIBANA_VERSION 4.0.0-beta3
 # - Fetch an nginx configuration customized to run exclusively the kibana 3 app
 # - Uninstall curl & curl dependencies, as it is no longer required.
 RUN  apt-get update && apt-get install -y curl ca-certificates --no-install-recommends \
-  && curl -SL "https://download.elasticsearch.org/kibana/kibana/kibana-$KIBANA_VERSION.tar.gz" \
+  && curl -SL "https://download.elasticsearch.org/kibana/kibana/kibana-$KIBANA_VERSION-linux-x64.tar.gz" \
   | tar -xzC /kibana --strip-components=1 \
   && curl -SL "https://raw.githubusercontent.com/vovimayhem/docker-kibana/master/kibana4/config/kibana.yml" \
   > /kibana/config/kibana.yml \
