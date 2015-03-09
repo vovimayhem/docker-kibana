@@ -12,7 +12,7 @@ RUN cp /etc/default/useradd /etc/default/useradd.bak \
   && rm /kibana/.bash_logout /kibana/.bashrc /kibana/.profile
 
 # Set the Kibana Version:
-ENV KIBANA_VERSION 4.0.0-rc1
+ENV KIBANA_VERSION 4.0.1
 
 # Fetch Kibana:
 # - Install curl so we can fetch the kibana code
